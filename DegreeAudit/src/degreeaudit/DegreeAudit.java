@@ -25,78 +25,67 @@ public class DegreeAudit {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        //create new scanner
     	Scanner input = new Scanner(System.in);
     	
+        //Get the input of classes
     	System.out.println("Input all of the classes you've taken, separated by a comma:");
-    	
         String courseInput = input.nextLine();
         
+        //get rid of the spaces and make it to an array separating it at the commas
         String noSpaces = courseInput.toUpperCase().replaceAll("\\s+","");
-        
         String[] noCommas = noSpaces.split(",");
         
-        
-
-        
+        //here are the parallel arrays of all the courses, credit numbers, and ID numbers
         int[] Id = {0,1,2,3,4};
         String[] courseName = {"CSET1000", "CSET1100", "CSET1200", "CSET1300", "CSET1400"};
         int[] credits = {4,3,4,4,3};
         
-        int howMany = courseName.length - noCommas.length;
+        //finding out classes a student has not taken given how many classes they have
+        int howMany = courseName.length - noCommas.length +1;
         
-        String[] alreadyTaken = new String[noCommas.length];
-        String[] haveNotTaken = new String[courseName.length-noCommas.length];
+        //initializing the arrays we are going to fill in
+        String[] alreadyTakenCN = new String[noCommas.length];
+        String[] notTaken = new String[howMany];
+        int[] alreadyTakenID = new int[noCommas.length];
        
+        //Getting the list of classes and ID numbers that have already been taken
         for (int i=0; i<noCommas.length;i++){
             
             if(Arrays.asList(courseName).contains(noCommas[i])){
-                alreadyTaken[i] = noCommas[i];
-                System.out.println(alreadyTaken[i]);
+                alreadyTakenCN[i] = noCommas[i];
+                alreadyTakenID[i]=Id[i];
+                
+                System.out.println(alreadyTakenCN[i]);
             } 
+        }
+        
+        for (int j=0; j<courseName.length;j++){
             
-           
-        }
-        
-        
-        //fix this
-        /*
-        for(int j=0; j<howMany; j++){
-            if(Arrays.asList(courseName).contains(alreadyTaken[j])){
+            if(Arrays.asList(alreadyTakenCN).contains(courseName[j])){
+                
+                
             } 
-            else {
-                haveNotTaken[j] = courseName[j];
-                System.out.println(haveNotTaken[j]);
-                } 
+            else{
+                
+                notTaken  = addElement(notTaken, courseName[j]);
+ 
+                    }
         }
-        */
         
-        
-        
-        
-        
-    	//try with a few classes 
-    	
-    	/*HashMap<String, Integer> allCourses = new HashMap<String, Integer>();
-    	
-    	allCourses.put("CSET1100",0);
-    	allCourses.put("CSET1200",1);
-    	allCourses.put("CSET1300",2);
-        allCourses.put("CSET1400",3);
-    	
-    	Set set = allCourses.entrySet();
-        Iterator i = set.iterator();
-        
-        
-    	while(i.hasNext()) {
-    		
-    		Map.Entry course = (Map.Entry)i.next();
-    		System.out.println(course.getKey());
-    	}
-*/
-    	
-    	
-    	
+        for(int h=0; h<=notTaken.length; h++){
+        System.out.println("you havent taken: "+notTaken[h]);
+        }
+}
+    
+    static String[] addElement(String[] a, String e){
+        a = Arrays.copyOf(a, a.length +1);
+        a[a.length -1] = e;
+        return a;
     }
     
+    
 }
+
+
+
