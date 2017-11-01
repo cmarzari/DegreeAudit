@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.lang.String;
 import java.lang.*;
+import java.util.List;
 
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class DegreeAudit {
         
         //initializing the arrays we are going to fill in
         String[] alreadyTakenCN = new String[noCommas.length];
-        String[] notTaken = new String[howMany];
+        List<String> notTaken = new ArrayList<String>();
         int[] alreadyTakenID = new int[noCommas.length];
        
         //Getting the list of classes and ID numbers that have already been taken
@@ -68,14 +69,12 @@ public class DegreeAudit {
             } 
             else{
                 
-                notTaken  = addElement(notTaken, courseName[j]);
+                notTaken.add(courseName[j]);
  
                     }
         }
         
-        for(int h=0; h<=notTaken.length; h++){
-        System.out.println("you havent taken: "+notTaken[h]);
-        }
+        System.out.println("Classes not taken" +Arrays.toString(notTaken.toArray()));
 }
     
     static String[] addElement(String[] a, String e){
@@ -83,6 +82,7 @@ public class DegreeAudit {
         a[a.length -1] = e;
         return a;
     }
+    
     
     
 }
