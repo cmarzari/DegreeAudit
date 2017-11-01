@@ -42,23 +42,28 @@ public class DegreeAudit {
         String[] courseName = {"CSET1000", "CSET1100", "CSET1200", "CSET1300", "CSET1400"};
         int[] credits = {4,3,4,4,3};
         
+        
         //finding out classes a student has not taken given how many classes they have
         int howMany = courseName.length - noCommas.length +1;
         
         //initializing the arrays we are going to fill in
-       // String[] alreadyTakenCN = new String[noCommas.length];
         List<String> alreadyTakenCN = new ArrayList<String>();
         List<String> notTaken = new ArrayList<String>();
         int[] alreadyTakenID = new int[noCommas.length];
        
         //Getting the list of classes and ID numbers that have already been taken
+        
+        
+        
         for (int i=0; i<noCommas.length;i++){
             
-            if(Arrays.asList(courseName).contains(noCommas[i])){
+            if(noCommas[i].contains("CSET")){
+                Cset cset = new Cset(noCommas[i]);
+            }
+            
+            /*if(Arrays.asList(courseName).contains(noCommas[i])){
                 alreadyTakenCN.add(noCommas[i]);
-                alreadyTakenID[i]=Id[i];
-                
-                
+                alreadyTakenID[i]=Id[i];                
             } 
         }
         System.out.println("Classes you have taken:");
@@ -66,29 +71,18 @@ public class DegreeAudit {
         
         for (int j=0; j<courseName.length;j++){
             
-            if(Arrays.asList(noCommas).contains(courseName[j])){
-                
-                
+            if(Arrays.asList(noCommas).contains(courseName[j])){      
             } 
             else{
                 
                 notTaken.add(courseName[j]);
- 
                     }
+*/
         }
         
         System.out.println("Classes you still have to take:");
         System.out.println(Arrays.toString(notTaken.toArray()));
-}
-    
-    static String[] addElement(String[] a, String e){
-        a = Arrays.copyOf(a, a.length +1);
-        a[a.length -1] = e;
-        return a;
-    }
-    
-    
-    
+}   
 }
 
 
