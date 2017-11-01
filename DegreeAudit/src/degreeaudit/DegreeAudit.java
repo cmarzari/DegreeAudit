@@ -46,7 +46,8 @@ public class DegreeAudit {
         int howMany = courseName.length - noCommas.length +1;
         
         //initializing the arrays we are going to fill in
-        String[] alreadyTakenCN = new String[noCommas.length];
+       // String[] alreadyTakenCN = new String[noCommas.length];
+        List<String> alreadyTakenCN = new ArrayList<String>();
         List<String> notTaken = new ArrayList<String>();
         int[] alreadyTakenID = new int[noCommas.length];
        
@@ -54,16 +55,18 @@ public class DegreeAudit {
         for (int i=0; i<noCommas.length;i++){
             
             if(Arrays.asList(courseName).contains(noCommas[i])){
-                alreadyTakenCN[i] = noCommas[i];
+                alreadyTakenCN.add(noCommas[i]);
                 alreadyTakenID[i]=Id[i];
                 
-                System.out.println(alreadyTakenCN[i]);
+                
             } 
         }
+        System.out.println("Classes you have taken:");
+        System.out.println(Arrays.toString(alreadyTakenCN.toArray()));
         
         for (int j=0; j<courseName.length;j++){
             
-            if(Arrays.asList(alreadyTakenCN).contains(courseName[j])){
+            if(Arrays.asList(noCommas).contains(courseName[j])){
                 
                 
             } 
@@ -74,7 +77,8 @@ public class DegreeAudit {
                     }
         }
         
-        System.out.println("Classes not taken" +Arrays.toString(notTaken.toArray()));
+        System.out.println("Classes you still have to take:");
+        System.out.println(Arrays.toString(notTaken.toArray()));
 }
     
     static String[] addElement(String[] a, String e){
