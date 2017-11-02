@@ -39,16 +39,17 @@ public class DegreeAudit {
         
         //here are the parallel arrays of all the courses, credit numbers, and ID numbers
         int[] Id = {0,1,2,3,4};
-        String[] courseName = {"CSET1000", "CSET1100", "CSET1200", "CSET1300", "CSET1400"};
+       // String[] courseName = {"CSET1000", "CSET1100", "CSET1200", "CSET1300", "CSET1400"};
         int[] credits = {4,3,4,4,3};
+        List<String> CsetClasses = new ArrayList<String>();
         
         
         //finding out classes a student has not taken given how many classes they have
-        int howMany = courseName.length - noCommas.length +1;
+        //int howMany = courseName.length - noCommas.length +1;
         
         //initializing the arrays we are going to fill in
-        List<String> alreadyTakenCN = new ArrayList<String>();
-        List<String> notTaken = new ArrayList<String>();
+       // List<String> alreadyTakenCN = new ArrayList<String>();
+       // List<String> notTaken = new ArrayList<String>();
         int[] alreadyTakenID = new int[noCommas.length];
        
         //Getting the list of classes and ID numbers that have already been taken
@@ -58,32 +59,62 @@ public class DegreeAudit {
         for (int i=0; i<noCommas.length;i++){
             
             if(noCommas[i].contains("CSET")){
-                Cset cset = new Cset(noCommas[i]);
+                String course = noCommas[i];
+                CsetClasses.add(course);
+                
             }
-            
-            /*if(Arrays.asList(courseName).contains(noCommas[i])){
-                alreadyTakenCN.add(noCommas[i]);
-                alreadyTakenID[i]=Id[i];                
+            else {
+                System.out.println(noCommas[i]+" is not a valid course");
+            }
+       }
+        
+       Cset(CsetClasses);
+        
+        
+}   
+    
+    
+    public static void Cset(List CsetClasses) {
+        String[] courseName = {"CSET1000", "CSET1100", "CSET1200", "CSET1300", "CSET1400"};
+        List<String> takenCset = new ArrayList<String>();
+        List<String> notTakenCset = new ArrayList<String>();
+        Arrays.toString(CsetClasses.toArray());
+        
+        
+       for(int i=0;i<CsetClasses.size();i++){
+           
+            String course  = CsetClasses.get(i).toString();
+            if(Arrays.asList(courseName).contains(course)){
+                takenCset.add(course);
+                //alreadyTakenID[i]=Id[i];                
             } 
-        }
+       }
+        
         System.out.println("Classes you have taken:");
-        System.out.println(Arrays.toString(alreadyTakenCN.toArray()));
+        System.out.println(Arrays.toString(takenCset.toArray()));
         
         for (int j=0; j<courseName.length;j++){
             
-            if(Arrays.asList(noCommas).contains(courseName[j])){      
+            if(CsetClasses.contains(courseName[j])){      
             } 
             else{
                 
-                notTaken.add(courseName[j]);
-                    }
-*/
-        }
+                notTakenCset.add(courseName[j]);
+            }
         
-        System.out.println("Classes you still have to take:");
-        System.out.println(Arrays.toString(notTaken.toArray()));
-}   
+        }    
+        
+    System.out.println("Classes you still have to take:");
+        System.out.println(Arrays.toString(notTakenCset.toArray()));
+    
 }
+    
+    public static void FinalOut (){
+        
+    }
+}
+
+
 
 
 
