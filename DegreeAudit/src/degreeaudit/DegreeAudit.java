@@ -37,9 +37,7 @@ public class DegreeAudit {
         String noSpaces = courseInput.toUpperCase().replaceAll("\\s+","");
         String[] noCommas = noSpaces.split(",");
         
-        //here are the parallel arrays of all the courses, credit numbers, and ID numbers
-        int[] Id = {0,1,2,3,4};
-        int[] credits = {4,3,4,4,3};
+        //initializing the hashmaps with the appropriate classes and credit values
         List<String> CsetClasses = new ArrayList<String>();
         List<String> EetClasses = new ArrayList<String>();
         
@@ -50,10 +48,7 @@ public class DegreeAudit {
             CsetList.put ("CSET1200", 4);
             CsetList.put ("CSET1300", 5);
             CsetList.put ("CSET1400", 3);
-            
-            
 
-        
         HashMap<String, Integer> EetList = new HashMap<String, Integer>();
             EetList.put ("EET1000", 4);
             EetList.put ("EET1100", 2);
@@ -162,6 +157,7 @@ public class DegreeAudit {
     }
     
     public static void FinalOut (){
+        System.out.println("-----------------");
         
     }
 }
