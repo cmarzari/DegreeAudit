@@ -21,7 +21,7 @@ public class DegreeAudit
         //initializing the hashmaps with the appropriate classes and credit values
         List<String> CsetClasses = new ArrayList<String>();
         List<String> EetClasses = new ArrayList<String>();
-        List<String> ElectClasses = new ArrayList<String>();
+        List<String> CommClasses = new ArrayList<String>();
 
         
         //the arrays of all the course names
@@ -39,28 +39,28 @@ public class DegreeAudit
             EetList.put ("EET1300", 5);
             EetList.put ("EET1400", 3);
             
-        HashMap<String, Integer> ElectList = new HashMap<String, Integer>();
-            ElectList.put ("COMM2600", 3);
-            ElectList.put ("COMM2820", 3);
-            ElectList.put ("COMM2840", 3);
-            ElectList.put ("BUAD2040", 3);
-            ElectList.put ("BUAD2050", 3);
-            ElectList.put ("BAUD2080", 3);
-            ElectList.put ("BUAD3010", 3);
-            ElectList.put ("BUAD3020", 3);
-            ElectList.put ("BUAD3030", 3);
-            ElectList.put ("BUAD3040", 3);
-            ElectList.put ("BAUD3470", 3);
-            ElectList.put ("BLAW3570", 3);
-            ElectList.put ("FINA3060", 3);
-            ElectList.put ("CSET3100", 3);
-            ElectList.put ("CSET3200", 3);
-            ElectList.put ("CSET3250", 3);
-            ElectList.put ("CSET3400", 3);
-            ElectList.put ("CSET4150", 3);
-            ElectList.put ("CSET4200", 4);
-            ElectList.put ("CSET4650", 4);
-            ElectList.put ("CSET4850", 4);
+        HashMap<String, Integer> CommList = new HashMap<String, Integer>();
+            CommList.put ("COMM2600", 3);
+            CommList.put ("COMM2820", 3);
+            CommList.put ("COMM2840", 3);
+            //ElectList.put ("BUAD2040", 3);
+            //ElectList.put ("BUAD2050", 3);
+            //ElectList.put ("BAUD2080", 3);
+            //ElectList.put ("BUAD3010", 3);
+            //ElectList.put ("BUAD3020", 3);
+            //ElectList.put ("BUAD3030", 3);
+            //ElectList.put ("BUAD3040", 3);
+            //ElectList.put ("BAUD3470", 3);
+            //ElectList.put ("BLAW3570", 3);
+            //ElectList.put ("FINA3060", 3);
+            //ElectList.put ("CSET3100", 3);
+            //ElectList.put ("CSET3200", 3);
+            //ElectList.put ("CSET3250", 3);
+            //ElectList.put ("CSET3400", 3);
+            //ElectList.put ("CSET4150", 3);
+            //ElectList.put ("CSET4200", 4);
+            //ElectList.put ("CSET4650", 4);
+            //ElectList.put ("CSET4850", 4);
             
  
         //Getting the list of classes and ID numbers that have already been taken
@@ -81,7 +81,7 @@ public class DegreeAudit
             }
             else if(noCommas[i].contains("COMM"))
             {
-                ElectClasses.add(noCommas[i]);
+                CommClasses.add(noCommas[i]);
             }
             else 
             {
@@ -90,8 +90,11 @@ public class DegreeAudit
        }
         
        System.out.println("total cset credits: "+Cset(CsetClasses, CsetList));
+       System.out.println("                             ");
        System.out.println("total eet credits: "+Eet(EetClasses, EetList));
-       System.out.println("total cset credits: "+Elect(ElectClasses, ElectList));
+       System.out.println("                             ");
+       System.out.println("total comm credits out of 3 required: "+Comm(CommClasses, CommList));
+       System.out.println("                             ");
        
     }   
     
@@ -176,45 +179,52 @@ public class DegreeAudit
         return EetCredits;
     }
     
-     public static int Elect(List ElectClasses, HashMap ElectList)
+     
+    
+    
+    
+    
+    
+    public static int Comm(List CommClasses, HashMap CommList)
     {
-        List<String> takenElect = new ArrayList<String>();
-        List<String> notTakenElect = new ArrayList<String>();
-        Arrays.toString(ElectClasses.toArray());
-        List<String> ElectCourseName = new ArrayList<String>(ElectList.keySet());
-        List<Integer> ElectCourseCredit = new ArrayList<Integer>(ElectList.values());
+        List<String> takenComm = new ArrayList<String>();
+        List<String> notTakenComm = new ArrayList<String>();
+        Arrays.toString(CommClasses.toArray());
+        List<String> CommCourseName = new ArrayList<String>(CommList.keySet());
+        List<Integer> CommCourseCredit = new ArrayList<Integer>(CommList.values());
         
-        String[] courseName = new String[ElectCourseName.size()];
-        courseName = ElectCourseName.toArray(courseName);
+        String[] courseName = new String[CommCourseName.size()];
+        courseName = CommCourseName.toArray(courseName);
         
-        Integer [] credit = new Integer[ElectCourseCredit.size()];
-        credit = ElectCourseCredit.toArray(credit);
+        Integer [] credit = new Integer[CommCourseCredit.size()];
+        credit = CommCourseCredit.toArray(credit);
         
-        int ElectCredits = 0;
+        int CommCredits = 0;
   
         for (int j=0; j<courseName.length;j++)
         {
-            
-            if(ElectClasses.contains(courseName[j]))
+             
+            if(CommClasses.contains(courseName[j]))
             {     
-                takenElect.add(courseName[j]);
-                ElectCredits = ElectCredits + credit[j];
+                takenComm.add(courseName[j]);
+                CommCredits = CommCredits + credit[j];
             } 
             else
-            {
-                
-                notTakenElect.add(courseName[j]);
+            {               
+                //notTakenComm.add(courseName[j]);
             }    
         }    
         
-        System.out.println("Elect Classes you have taken:");
-        System.out.println(Arrays.toString(takenElect.toArray()));
+        System.out.println("COMM Classes you have taken: ");
+        System.out.println(Arrays.toString(takenComm.toArray()));
         
-        System.out.println("Elect Classes you still have to take:");
-        System.out.println(Arrays.toString(notTakenElect.toArray()));   
+        //System.out.println("Must take at least one COMM class: ");
+        //System.out.println(Arrays.toString(notTakenComm.toArray()));   
         
-        return ElectCredits;
+        return CommCredits;
     }    
+     
+    
     
     
     
@@ -224,5 +234,3 @@ public class DegreeAudit
         System.out.println("-----------------");       
     }
 }
-
-
