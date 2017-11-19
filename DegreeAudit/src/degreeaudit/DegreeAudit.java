@@ -25,7 +25,8 @@ public class DegreeAudit
         List<String> CsetElectClasses = new ArrayList<String>();
         List<String> BuadClasses = new ArrayList<String>();
         List<String> NaturalClasses = new ArrayList<String>();
-        List<String> SocialClasses = new ArrayList<String>();         
+        List<String> SocialClasses = new ArrayList<String>();   
+        List<String> HumanityClasses = new ArrayList<String>();   
         
         //the arrays of all the course names
         HashMap<String, Integer> CsetList = new HashMap<String, Integer>();
@@ -89,6 +90,24 @@ public class DegreeAudit
             SocialList.put ("SOCW", 3);
             SocialList.put ("SOC",  3);
   
+        HashMap<String, Integer> HumanityList = new HashMap<String, Integer>();
+            HumanityList.put ("ANTH", 3);
+            HumanityList.put ("CLC",  3);
+            HumanityList.put ("COMM", 3);
+            HumanityList.put ("ENGL", 3);
+            HumanityList.put ("FREN", 3);
+            HumanityList.put ("GERM", 3);
+            HumanityList.put ("HIST", 3);
+            HumanityList.put ("HUM",  3);
+            HumanityList.put ("JAPN", 3);
+            HumanityList.put ("MUS",  3);
+            HumanityList.put ("PHIL", 3);
+            HumanityList.put ("RUS",  3);
+            HumanityList.put ("SPAN", 3);
+            HumanityList.put ("THR",  3);
+
+
+            
 
             
  
@@ -171,7 +190,67 @@ public class DegreeAudit
             if(noCommas[i].contains("SOC"))
             {
                 SocialClasses.add(noCommas[i]);
-            }              
+            } 
+            if(noCommas[i].contains("ARTH"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }             
+            if(noCommas[i].contains("ARTH"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("CLC"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }      
+            if(noCommas[i].contains("COMM"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }      
+            if(noCommas[i].contains("ENGL"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("FREN"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("GERM"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("HIST"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("HUM"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("JAPN"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("MUS"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("PHIL"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("RUS"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("SPAN"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                  
+            if(noCommas[i].contains("THR"))
+            {
+                HumanityClasses.add(noCommas[i]);
+            }                            
             else 
             {
                 System.out.println(noCommas[i]+" is not a valid course");
@@ -189,9 +268,12 @@ public class DegreeAudit
        System.out.println("total natural science credits out of 4 required: " + Natural(NaturalClasses, NaturalList));
        System.out.println("                             ");
        System.out.println("total proffesional development credits out of 6 required: " + Buad(BuadClasses, BuadList));
-       System.out.println("                             ");      
+       System.out.println("                             ");     
        System.out.println("total social science credits out of 3 required: " + Social(SocialClasses, SocialList));
-       System.out.println("                             ");            
+       System.out.println("                             ");   
+       System.out.println("total humanities credits out of 6 required: " + Humanity(HumanityClasses, HumanityList));
+       System.out.println("                             ");  
+       
     }   
     
     
@@ -346,7 +428,7 @@ public class DegreeAudit
             }    
         }    
         
-        System.out.println("CSET Elect Classes you have taken: ");
+        System.out.println("CSET Elective Classes you have taken: ");
         System.out.println(Arrays.toString(takenCsetElect.toArray()));
         
         System.out.println("Must take at least two COMM elective class: ");
@@ -385,10 +467,10 @@ public class DegreeAudit
             }    
         }    
         
-        System.out.println("Buad Elect Classes you have taken: ");
+        System.out.println("Buad classes you have taken: ");
         System.out.println(Arrays.toString(takenBuad.toArray()));
         
-        System.out.println("Must take at least two Buad class: ");
+        System.out.println("Must take at least two Buad classes: ");
         System.out.println(Arrays.toString(notTakenBuad.toArray()));   
         
         return BuadCredits;
@@ -475,7 +557,49 @@ public class DegreeAudit
         
         return SocialCredits;
         
-    }            
+    }
+        
+        
+    public static int Humanity(List HumanityClasses, HashMap HumanityList)
+    {
+        List<String> takenHumanity = new ArrayList<String>();
+        List<String> notTakenHumanity = new ArrayList<String>();
+        Arrays.toString(HumanityClasses.toArray());
+        List<String> HumanityCourseName = new ArrayList<String>(HumanityList.keySet());
+        List<Integer> HumanityCourseCredit = new ArrayList<Integer>(HumanityList.values());
+        
+        String[] courseName = new String[HumanityCourseName.size()];
+        courseName = HumanityCourseName.toArray(courseName);
+        
+        Integer [] credit = new Integer[HumanityCourseCredit.size()];
+        credit = HumanityCourseCredit.toArray(credit);
+        
+        int HumanityCredits = 0;
+  
+        for (int j=0; j<courseName.length;j++)
+        {
+             
+            if(HumanityClasses.contains(courseName[j]))
+            {     
+                takenHumanity.add(courseName[j]);
+                HumanityCredits = HumanityCredits + credit[j];
+            } 
+            else if (HumanityCredits < 3)
+            {               
+                notTakenHumanity.add(courseName[j]);
+            }    
+        }    
+        
+        System.out.println("Humanities classes you have taken: ");
+        System.out.println(Arrays.toString(takenHumanity.toArray()));
+        
+        System.out.println("Must take at least two Humanities classes: ");
+        System.out.println(Arrays.toString(notTakenHumanity.toArray()));   
+        
+        return HumanityCredits;
+        
+    }    
+        
  public static void FinalOut ()
     {
         System.out.println("-----------------");       
