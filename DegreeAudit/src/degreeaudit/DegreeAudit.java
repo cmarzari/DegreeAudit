@@ -189,7 +189,9 @@ public class DegreeAudit
        System.out.println("total natural science credits out of 4 required: " + Natural(NaturalClasses, NaturalList));
        System.out.println("                             ");
        System.out.println("total proffesional development credits out of 6 required: " + Buad(BuadClasses, BuadList));
-       System.out.println("                             ");       
+       System.out.println("                             ");      
+       System.out.println("total social science credits out of 3 required: " + Social(SocialClasses, SocialList));
+       System.out.println("                             ");            
     }   
     
     
