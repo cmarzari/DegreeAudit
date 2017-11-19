@@ -26,7 +26,8 @@ public class DegreeAudit
         List<String> BuadClasses = new ArrayList<String>();
         List<String> NaturalClasses = new ArrayList<String>();
         List<String> SocialClasses = new ArrayList<String>();   
-        List<String> HumanityClasses = new ArrayList<String>();   
+        List<String> HumanityClasses = new ArrayList<String>(); 
+        List<String> EnglClasses = new ArrayList<String>();
         
         //the arrays of all the course names
         HashMap<String, Integer> CsetList = new HashMap<String, Integer>();
@@ -105,7 +106,11 @@ public class DegreeAudit
             HumanityList.put ("RUS",  3);
             HumanityList.put ("SPAN", 3);
             HumanityList.put ("THR",  3);
+            HumanityList.put ("PHIL1010", 3);
 
+        HashMap<String, Integer> EnglList = new HashMap<String, Integer>();
+            HumanityList.put ("ENGL1110", 3);
+            HumanityList.put ("ENGL2950",  3);
 
             
 
@@ -120,8 +125,7 @@ public class DegreeAudit
             
             if(noCommas[i].contains("CSET"))
             {
-                CsetClasses.add(noCommas[i]);
-                
+                CsetClasses.add(noCommas[i]);               
             }
             if(noCommas[i].contains("EET"))
             {
@@ -250,7 +254,11 @@ public class DegreeAudit
             if(noCommas[i].contains("THR"))
             {
                 HumanityClasses.add(noCommas[i]);
-            }                            
+            }     
+            if(noCommas[i].contains("ENGL"))
+            {
+                EnglClasses.add(noCommas[i]);
+            } 
             else 
             {
                 System.out.println(noCommas[i]+" is not a valid course");
@@ -272,7 +280,9 @@ public class DegreeAudit
        System.out.println("total social science credits out of 3 required: " + Social(SocialClasses, SocialList));
        System.out.println("                             ");   
        System.out.println("total humanities credits out of 6 required: " + Humanity(HumanityClasses, HumanityList));
-       System.out.println("                             ");  
+       System.out.println("                             "); 
+       System.out.println("total english credits out of 6 required: " + Engl(EnglClasses, EnglList));
+       System.out.println("                             ");        
        
     }   
     
@@ -600,6 +610,50 @@ public class DegreeAudit
         
     }    
         
+    
+    public static int Engl(List EnglClasses, HashMap EnglList)
+    {
+        List<String> takenEngl = new ArrayList<String>();
+        List<String> notTakenEngl = new ArrayList<String>();
+        Arrays.toString(EnglClasses.toArray());
+        List<String> EnglCourseName = new ArrayList<String>(EnglList.keySet());
+        List<Integer> EnglCourseCredit = new ArrayList<Integer>(EnglList.values());
+        
+        String[] courseName = new String[EnglCourseName.size()];
+        courseName = EnglCourseName.toArray(courseName);
+        
+        Integer [] credit = new Integer[EnglCourseCredit.size()];
+        credit = EnglCourseCredit.toArray(credit);
+        
+        int EnglCredits = 0;
+  
+        for (int j=0; j<courseName.length;j++)
+        {
+             
+            if(EnglClasses.contains(courseName[j]))
+            {     
+                takenEngl.add(courseName[j]);
+                EnglCredits = EnglCredits + credit[j];
+            } 
+            else if (EnglCredits < 3)
+            {               
+                notTakenEngl.add(courseName[j]);
+            }    
+        }    
+        
+        System.out.println("English classes you have taken: ");
+        System.out.println(Arrays.toString(takenEngl.toArray()));
+        
+        System.out.println("Must take these english classes: ");
+        System.out.println(Arrays.toString(notTakenEngl.toArray()));   
+        
+        return EnglCredits;
+    }       
+    
+    
+    
+    
+    
  public static void FinalOut ()
     {
         System.out.println("-----------------");       
