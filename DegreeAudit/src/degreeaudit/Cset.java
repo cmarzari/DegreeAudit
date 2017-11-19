@@ -7,50 +7,58 @@ package degreeaudit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  *
  * @author cmarzari
  */
-public class Cset extends DegreeAudit {
+public class Cset {
     
-    public class Cset (course){
-         int[] Id = {0,1,2,3,4};
-        String[] courseNameCset = {"CSET1000", "CSET1100", "CSET1200", "CSET1300", "CSET1400"};
-        int[] credits = {4,3,4,4,3};
-        
-        //finding out classes a student has not taken given how many classes they have
-        
-        
-        //initializing the arrays we are going to fill in
-        List<String> alreadyTakenCset = new ArrayList<String>();
-        List<String> notTakenCset = new ArrayList<String>();
-        List<Integer> alreadyTakenCsetID = new ArrayList<Integer>();
-        
+     public static int Cset(List CsetClasses, HashMap CsetList, HashMap CsetElectList) {
        
-        //Getting the list of classes and ID numbers that have already been taken
-        for (int i=0; i<noCommas.length;i++){
-            
-            if(Arrays.asList(courseName).contains(noCommas[i])){
-                alreadyTakenCN.add(noCommas[i]);
-                alreadyTakenID[i]=Id[i];                
-            } 
-        }
-        System.out.println("Classes you have taken:");
-        System.out.println(Arrays.toString(alreadyTakenCN.toArray()));
+        List<String> takenCset = new ArrayList<String>();
+        List<String> notTakenCset = new ArrayList<String>();
+        Arrays.toString(CsetClasses.toArray());
+        List<String> CsetCourseName = new ArrayList<String>(CsetList.keySet());
+        List<Integer> CsetCourseCredit = new ArrayList<Integer>(CsetList.values());
         
+        //converting list to array
+        String[] courseName = new String[CsetCourseName.size()];
+        courseName = CsetCourseName.toArray(courseName);
+        
+        Integer [] credit = new Integer[CsetCourseCredit.size()];
+        credit = CsetCourseCredit.toArray(credit);
+        
+        int CsetCredits = 0;
+  
         for (int j=0; j<courseName.length;j++){
             
-            if(Arrays.asList(noCommas).contains(courseName[j])){      
+            if(CsetClasses.contains(courseName[j])){     
+                takenCset.add(courseName[j]);
+                CsetCredits = CsetCredits + credit[j];
             } 
+            
             else{
                 
-                notTaken.add(courseName[j]);
-                    }
-        }
+                notTakenCset.add(courseName[j]);
+            }
         
-        System.out.println("Classes you still have to take:");
-        System.out.println(Arrays.toString(notTaken.toArray())); 
+        }    
+        
+        
+        System.out.println("CSET and EECS Classes you have taken:");
+        System.out.println(Arrays.toString(takenCset.toArray()));
+        
+        System.out.println("CSET Classes you still have to take:");
+        System.out.println(Arrays.toString(notTakenCset.toArray()));
+        
+        
+        return CsetCredits;
+    
 }
+        
+           
 }
+
