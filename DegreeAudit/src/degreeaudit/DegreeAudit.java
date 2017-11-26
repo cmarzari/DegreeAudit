@@ -66,6 +66,15 @@ public class DegreeAudit {
             CsetList.put ("CSET4750", 4);
             CsetList.put ("CSET4250", 4);
             CsetList.put ("EECS2520", 4);
+            //electives
+            CsetList.put ("CSET3100", 3);
+            CsetList.put ("CSET3200", 3);
+            CsetList.put ("CSET3250", 3);
+            CsetList.put ("CSET3400", 3);
+            CsetList.put ("CSET4150", 3);
+            CsetList.put ("CSET4200", 4);
+            CsetList.put ("CSET4650", 4);
+            CsetList.put ("CSET4850", 4);
             
 
         HashMap<String, Integer> EetList = new HashMap<String, Integer>();
@@ -96,15 +105,17 @@ public class DegreeAudit {
             NaturalList.put ("EEES", 4);
             NaturalList.put ("PHYS", 4);
             
-        HashMap<String, Integer> CsetElectList = new HashMap<String, Integer>();
-            CsetElectList.put ("CSET3100", 3);
-            CsetElectList.put ("CSET3200", 3);
-            CsetElectList.put ("CSET3250", 3);
-            CsetElectList.put ("CSET3400", 3);
-            CsetElectList.put ("CSET4150", 3);
-            CsetElectList.put ("CSET4200", 4);
-            CsetElectList.put ("CSET4650", 4);
-            CsetElectList.put ("CSET4850", 4);
+        HashMap<String, Integer> CsetElectList3 = new HashMap<String, Integer>();
+            CsetElectList3.put ("CSET3100", 3);
+            CsetElectList3.put ("CSET3200", 3);
+            CsetElectList3.put ("CSET3250", 3);
+            CsetElectList3.put ("CSET3400", 3);
+            CsetElectList3.put ("CSET4150", 3);
+            
+        HashMap<String, Integer> CsetElectList4 = new HashMap<String, Integer>();
+            CsetElectList4.put ("CSET4200", 4);
+            CsetElectList4.put ("CSET4650", 4);
+            CsetElectList4.put ("CSET4850", 4);
             
          HashMap<String, Integer> CommList = new HashMap<String, Integer>();
             CommList.put ("COMM2600", 3);
@@ -152,7 +163,7 @@ public class DegreeAudit {
         //Getting the list of classes and ID numbers that have already been taken       
         for (int i=0; i<noCommas.length;i++){
             
-            if(noCommas[i].contains("CSET")||noCommas[i].contains("CSET")){
+            if(noCommas[i].contains("CSET")||noCommas[i].contains("EECS")){
                 CsetClasses.add(noCommas[i]);
                 
             }
@@ -165,25 +176,37 @@ public class DegreeAudit {
             else if(noCommas[i].contains("MATH")||noCommas[i].contains("PHYS")){
                 MathandPhysClasses.add(noCommas[i]);
             }
+            else if(noCommas[i].contains("COMM")){
+                CommClasses.add(noCommas[i]);
+            }
+            else if(noCommas[i].contains("BUAD")||noCommas[i].contains("FINA")){
+                BuadClasses.add(noCommas[i]);
+            }
             else {
                 System.out.println(noCommas[i]+" is not a valid course");
             }
+            
        }
         
         //setting local variables to the return of classes
         //classes in other files called appropriatly
-        int csetCredits = Cset.Cset(CsetClasses, CsetList, CsetElectList);
+        int csetCredits = Cset.Cset(CsetClasses, CsetList, CsetElectList3, CsetElectList4);
         int eetCredits = Eet.Eet(EetClasses, EetList);
         int engtCredits = Engt.Engt(EngtClasses, EngtList);
         int mathandphysCredits = MathandPhys.MathandPhys(MathandPhysClasses, MathandPhysList);
-        int totalCredits = csetCredits + eetCredits +engtCredits+mathandphysCredits;
+        int commCredits = Comm.Comm(CommClasses, CommList);
+        int buadCredits = Buad.Buad(BuadClasses, BuadList);
+        
+        int totalCredits = csetCredits + eetCredits +engtCredits+mathandphysCredits+commCredits+buadCredits;
         
         
         FinalOut();
-       System.out.println("total cset credits: "+csetCredits);
-       System.out.println("total eet credits: "+eetCredits);
+       System.out.println("total CSET credits: "+csetCredits);
+       System.out.println("total EET credits: "+eetCredits);
        System.out.println("total ENGT credits: "+engtCredits);
        System.out.println("total MATH and PHYS credits: "+mathandphysCredits);
+       System.out.println("total COMM credits: "+commCredits);
+       System.out.println("total Professional Development credits: "+buadCredits);
        FinalOut();
        System.out.println("TOTAL CREDITS TAKEN: "+totalCredits);
        

@@ -16,30 +16,53 @@ import java.util.List;
  */
 public class Cset {
     
-     public static int Cset(List CsetClasses, HashMap CsetList, HashMap CsetElectList) {
+     public static int Cset(List CsetClasses, HashMap CsetList, HashMap CsetElectList3, HashMap CsetElectList4) {
        
+         boolean CsetElect3 = false;
+         boolean CsetElect4 = false;
+         
         List<String> takenCset = new ArrayList<String>();
         List<String> notTakenCset = new ArrayList<String>();
-        Arrays.toString(CsetClasses.toArray());
+        //Arrays.toString(CsetClasses.toArray());
+        List<String> Cset3 = new ArrayList<String>();
+        List<String> Cset4 = new ArrayList<String>();
+        
+      
+        
         List<String> CsetCourseName = new ArrayList<String>(CsetList.keySet());
         List<Integer> CsetCourseCredit = new ArrayList<Integer>(CsetList.values());
         
-        //converting list to array
-        String[] courseName = new String[CsetCourseName.size()];
-        courseName = CsetCourseName.toArray(courseName);
+        List<String> CsetElectList3Name = new ArrayList<String>(CsetList.keySet());
+        List<Integer> CsetElectList3Credit = new ArrayList<Integer>(CsetList.values());
         
-        Integer [] credit = new Integer[CsetCourseCredit.size()];
-        credit = CsetCourseCredit.toArray(credit);
+        List<String> CsetElectList4Name = new ArrayList<String>(CsetList.keySet());
+        List<Integer> CsetElectList4Credit = new ArrayList<Integer>(CsetList.values());
+
+        Integer [] CsetCredit = new Integer[CsetCourseCredit.size()];
+        CsetCredit = CsetCourseCredit.toArray(CsetCredit);
+        
+        //fix alllllllllllllll of this shit
+         String[] courseName = new String[CsetCourseName.size()];
+        courseName = CsetCourseName.toArray(courseName);
         
         int CsetCredits = 0;
   
-        for (int j=0; j<courseName.length;j++){
+       for (int j=0; j<courseName.length;j++){
             
             if(CsetClasses.contains(courseName[j])){     
                 takenCset.add(courseName[j]);
-                CsetCredits = CsetCredits + credit[j];
+                CsetCredits = CsetCredits + CsetCredit[j];
+                
+                if (CsetElectList3Name.contains(courseName[j])){
+                    Cset3.add(courseName[j]);
+                    CsetElectList3Name.remove(courseName[j]);
+                }
+                
+                else if(CsetElectList4Name.contains(courseName[j])){
+                    Cset4.add(courseName[j]);
+                    CsetElectList4Name.remove(courseName[j]);
+                }
             } 
-            
             else{
                 
                 notTakenCset.add(courseName[j]);
@@ -52,7 +75,28 @@ public class Cset {
         System.out.println(Arrays.toString(takenCset.toArray()));
         
         System.out.println("CSET Classes you still have to take:");
-        System.out.println(Arrays.toString(notTakenCset.toArray()));
+        System.out.println(Arrays.toString(CsetCourseName.toArray()));
+        
+        if ((Cset3.size()>=1)&& (Cset4.size()>=1)){
+           System.out.println("You have fulfilled the CSET elective requirements with the following classes:"); 
+           System.out.println(Arrays.toString(Cset3.toArray()));
+           System.out.println(Arrays.toString(Cset4.toArray()));
+        }
+        else if ((Cset3.size()==0)&& (Cset4.size()>=1)){
+            System.out.println("You must take one of the following classes to fulfill the elective 3:");
+            System.out.println(Arrays.toString(CsetElectList3Name.toArray()));
+        }
+        else if ((Cset3.size()>=1)&& (Cset4.size()==0)){
+            System.out.println("You must take one of the following classes to fulfill the elective 4:");
+            System.out.println(Arrays.toString(CsetElectList4Name.toArray()));
+        }
+        else{
+         System.out.println("Missing CSET Electives");
+         System.out.println("Choose one 3 credit class: ");
+         System.out.println(Arrays.toString(CsetElectList3Name.toArray()));
+         System.out.println("Choose one 4 credit class: ");
+         System.out.println(Arrays.toString(CsetElectList4Name.toArray()));
+        }
         
         
         return CsetCredits;
